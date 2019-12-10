@@ -16,7 +16,7 @@ import requests
 from requests import get
 from bs4 import BeautifulSoup
 
-from env import github_token
+from env import github_token, github_username
 
 # TODO: Make a github personal access token.
 #     1. Go here and generate a personal access token https://github.com/settings/tokens
@@ -29,19 +29,18 @@ from env import github_token
 def generate_repo_list():
     repos = pd.read_csv("90_titles.csv", usecols=["titles"])
     repos = pd.DataFrame(repos.titles.str.strip())
-    repos["github_url"] = "https://github.com/" + repos.titles
-    return list(repos.github_url)
+    return list(repos.titles)
 
 repos = generate_repo_list()
-repos
+
 headers = {
     "Authorization": f"token {github_token}",
-    "User-Agent": "YOUR_GITHUB_USERNAME",
+    "User-Agent": github_username,
 }
 
 if (
     headers["Authorization"] == "token "
-    or headers["User-Agent"] == "YOUR_GITHUB_USERNAME"
+    or headers["User-Agent"] == YOUR_GITHUB_USERNAME
 ):
     raise Exception(
         "You need to follow the instructions marked TODO in this script before trying to use it"
