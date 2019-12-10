@@ -36,12 +36,12 @@ repos = generate_repo_list()
 repos
 headers = {
     "Authorization": f"token {github_token}",
-    "User-Agent": "YOUR_GITHUB_USERNAME",
+    "User-Agent": f"{YOUR_GITHUB_USERNAME}",
 }
 
 if (
     headers["Authorization"] == "token "
-    or headers["User-Agent"] == "YOUR_GITHUB_USERNAME"
+    or headers["User-Agent"] == f"{YOUR_GITHUB_USERNAME}"
 ):
     raise Exception(
         "You need to follow the instructions marked TODO in this script before trying to use it"
