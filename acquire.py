@@ -10,46 +10,13 @@ import os
 import json
 from typing import Dict, List
 
+import pandas as pd
+
 import requests
 from requests import get
 from bs4 import BeautifulSoup
 
 from env import github_token
-
-def get_titles(soup):
-    all_titles = []
-    for h3 in soup.find_all("h3"):
-        title = h3.text
-        all_titles.append(title)
-    
-    if len(all_titles)>2:
-        all_titles = all_titles[2:]
-        
-    return all_titles
-
-def make_soup():
-    start_url = "https://github.com/search?p="
-    end_url = "&q=stars%3A%3E100&s=stars&type=Repositories"
-    
-    collected_titles = []
-    
-    for page_no in range (1,100):
-        url = start_url + str(page_no) + end_url
-        headers = {"User-Agent": "Bayes-NLP Project"}
-        response = get(url, headers=headers)
-    
-        soup = BeautifulSoup(response.content, "html.parser")
-
-        title_per_page = get_titles(soup)
-        collected_titles.extend(title_per_page)
-        
-#         if len(title_per_page) == 0:
-#             print("---No Titles Found")
-#             print(response.text)
-            
-    #collected_titles = pd.DataFrame({"titles":collected_titles})
-    
-    return collected_titles
 
 # TODO: Make a github personal access token.
 #     1. Go here and generate a personal access token https://github.com/settings/tokens
@@ -57,10 +24,15 @@ def make_soup():
 # TODO: Replace YOUR_GITHUB_USERNAME below with your github username.
 # TODO: Add more repositories to the `repos` list.
 
-repos = make_soup()
+# REPOS
 
-repos
+def generate_repo_list():
+    repos = pd.read_csv("90_titles.csv", usecols=["titles"])
+    repos = pd.DataFrame(repos.titles.str.strip())
+    repos["github_url"] = "https://github.com/" + repos.titles
+    return list(repos.github_url)
 
+repos = generate_repo
 headers = {
     "Authorization": f"token {github_token}",
     "User-Agent": "YOUR_GITHUB_USERNAME",
