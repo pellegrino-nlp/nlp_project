@@ -40,7 +40,7 @@ headers = {
 
 if (
     headers["Authorization"] == "token "
-    or headers["User-Agent"] == YOUR_GITHUB_USERNAME
+    or headers["User-Agent"] == 'YOUR_GITHUB_USERNAME'
 ):
     raise Exception(
         "You need to follow the instructions marked TODO in this script before trying to use it"
