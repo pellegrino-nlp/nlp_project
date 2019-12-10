@@ -32,7 +32,8 @@ def generate_repo_list():
     repos["github_url"] = "https://github.com/" + repos.titles
     return list(repos.github_url)
 
-repos = generate_repo
+repos = generate_repo_list()
+repos
 headers = {
     "Authorization": f"token {github_token}",
     "User-Agent": "YOUR_GITHUB_USERNAME",
