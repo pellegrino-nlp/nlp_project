@@ -78,10 +78,14 @@ def process_repo(repo: str) -> Dict[str, str]:
     a dictionary with the language of the repo and the readme contents.
     """
     contents = get_repo_contents(repo)
+    try:
+        readme_contents = requests.get(get_readme_download_url(contents)).text
+    except:
+        readme_contents = None
     return {
         "repo": repo,
         "language": get_repo_language(repo),
-        "readme_contents": requests.get(get_readme_download_url(contents)).text,
+        "readme_contents": readme_contents,
     }
 
 
@@ -96,5 +100,3 @@ def scrape_github_data():
 
 if __name__ == "__main__":
     scrape_github_data()
-
-scrape_github_data()
