@@ -53,7 +53,7 @@ def tokenize(string):
 
 extra_words = ['http', 'https', 'www', 'banner', 'request', 'img', 'com', 'png', 'welcome',
                 'doctype', 'abbr', 'address', 'base', 'body', 'src',
-                'br', 'div' , 'org', 'icu', 'href', 'image', 'logo']
+                'br', 'div' , 'org', 'icu', 'href', 'image', 'logo', 'github']
 
 def remove_stopwords(tokenized_string, extra_words=extra_words, exclude_words=[]):
     words = tokenized_string.split()
