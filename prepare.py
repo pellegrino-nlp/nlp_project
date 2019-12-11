@@ -51,7 +51,9 @@ def tokenize(string):
     tokenizer = nltk.tokenize.ToktokTokenizer()
     return tokenizer.tokenize(string, return_str=True)
 
-extra_words = ['http', 'https', 'www', 'banner', 'request', 'img', 'com', 'png', 'welcome']
+extra_words = ['http', 'https', 'www', 'banner', 'request', 'img', 'com', 'png', 'welcome',
+                'doctype', 'abbr', 'address', 'base', 'body', 'src',
+                'br', 'div' , 'org', 'icu', 'href', 'image', 'logo']
 
 def remove_stopwords(tokenized_string, extra_words=extra_words, exclude_words=[]):
     words = tokenized_string.split()
