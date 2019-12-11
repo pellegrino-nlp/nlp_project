@@ -27,15 +27,15 @@ from env import github_token, github_username
 # REPOS
 
 def generate_repo_list():
-    repos = pd.read_csv("90_titles.csv", usecols=["titles"])
-    repos = pd.DataFrame(repos.titles.str.strip())
-    return list(repos.titles)
+    repos = pd.read_csv("all_repos.csv", usecols=["full_name"])
+    repos = pd.DataFrame(repos.full_name.str.strip())
+    return list(repos.full_name)
 
 repos = generate_repo_list()
 
 headers = {
-    "Authorization": f"token {github_token}",
-    "User-Agent": github_username,
+    "Authorization": f"token f9ce6edcb00f1f93dc23f6cc1a50b701f5b4aa84",
+    "User-Agent": "crisgiovanoni",
 }
 
 if (
@@ -91,8 +91,10 @@ def scrape_github_data():
     `data.json`.
     """
     data = [process_repo(repo) for repo in repos]
-    json.dump(data, open("data.json", "w"))
+    json.dump(data, open("final_data.json", "w"))
 
 
 if __name__ == "__main__":
     scrape_github_data()
+
+scrape_github_data()
