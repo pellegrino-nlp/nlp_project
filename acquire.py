@@ -34,8 +34,8 @@ def generate_repo_list():
 repos = generate_repo_list()
 
 headers = {
-    "Authorization": f"token f9ce6edcb00f1f93dc23f6cc1a50b701f5b4aa84",
-    "User-Agent": "crisgiovanoni",
+    "Authorization": f"token {github_token}",
+    "User-Agent": f"{github_username}",
 }
 
 if (
